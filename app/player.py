@@ -16,7 +16,3 @@ class Player:
 
     def __str__(self):
         return f"{self.uid}: {self.name}"
-
-
-test = Player("3047", "Bradley")
-print(test)
