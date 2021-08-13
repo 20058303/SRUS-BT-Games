@@ -5,12 +5,17 @@
 # Created       :   13/08/2021
 # Version       :   0.1
 # Description   :
-#   This is a description for the file, and I am lazy.
+#   A class file for the player object.
 #
 
 
 class Player:
     def __init__(self, id, name):
+        """
+        The player object.
+        :param id: Unique Identifier for the player.
+        :param name: The name of the player.
+        """
         self.uid = id
         self.name = name
 

@@ -5,7 +5,7 @@
 # Created       :   13/08/2021
 # Version       :   0.1
 # Description   :
-#   This is a description for the file, and I am lazy.
+#   A class file for the player list object, containing player nodes.
 #
 
 from app.player import Player
@@ -14,6 +14,9 @@ from app.player_node import PlayerNode
 
 class PlayerList:
     def __init__(self):
+        """
+        Double Linked List used to store and hold Player Information.
+        """
         self.__first = None
         self.__last = None
 
@@ -34,6 +37,12 @@ class PlayerList:
         self.__last = value
 
     def InsertAtStart(self, id, name):
+        """
+        Inserts a player object at the start of the player list.
+        :param id: ID associated with the player object
+        :param name: Name associated with the player object
+        """
+
         tempNode = PlayerNode(Player(id, name))
         if self.isEmpty():
             self.first = tempNode
@@ -44,6 +53,12 @@ class PlayerList:
             self.first = tempNode
 
     def InsertAtEnd(self, id, name):
+        """
+        Inserts a player object at the end of the player list.
+        :param id: ID associated with the player object
+        :param name: Name associated with the player object
+        """
+
         tempNode = PlayerNode(Player(id, name))
         if self.isEmpty():
             self.first = tempNode
@@ -54,6 +69,10 @@ class PlayerList:
             self.last = tempNode
 
     def DeleteAtStart(self):
+        """
+        Deletes the first player object within the player list.
+        """
+
         if not self.isEmpty():
             if self.first.next is not None:
                 self.first = self.first.next
@@ -63,6 +82,10 @@ class PlayerList:
                 self.last = None
 
     def DeleteAtEnd(self):
+        """
+        Deletes the last player object within the player list.
+        """
+
         if not self.isEmpty():
             if self.last.previous is not None:
                 self.last = self.last.previous
@@ -72,6 +95,11 @@ class PlayerList:
                 self.last = None
 
     def DeleteWithKey(self, key):
+        """
+        Deletes the first instance of a player object with the key provided.
+        :param key: The key you wish to search for.
+        """
+
         if not self.isEmpty():
             currentNode = self.first
             while True:
@@ -95,11 +123,19 @@ class PlayerList:
                     break
 
     def isEmpty(self):
+        """
+        Checks if the player list is empty.
+        """
         if self.first is None:
             return True
         return False
 
     def DisplayList(self, forward=True):
+        """
+        Displays the player list in a user-friendly format.
+        :param forward: If True, will display the list from the start (Boolean)
+        """
+
         counter = 0
         s = ""
         if not self.isEmpty():
@@ -120,13 +156,3 @@ class PlayerList:
             return f"{counter} Players:\n" + s
         else:
             return "No players listed."
-
-
-test = PlayerList()
-test.InsertAtEnd("001", "Test1")
-test.InsertAtEnd("002", "Test2")
-test.InsertAtEnd("003", "Test3")
-
-test.DeleteWithKey("002")
-print(test.DisplayList(True))
-print(test.DisplayList(False))

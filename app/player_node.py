@@ -5,7 +5,7 @@
 # Created       :   13/08/2021
 # Version       :   0.1
 # Description   :
-#   This is a description for the file, and I am lazy.
+#   A class file for the player node, to be used with the player_list.py
 #
 
 from app.player import Player
@@ -13,6 +13,10 @@ from app.player import Player
 
 class PlayerNode:
     def __init__(self, player):
+        """
+        Creates a node for a doubly linked list, containing a player object.
+        :param player: Player object to be contained within this node.
+        """
         self.__player = player
         self.__next = None
         self.__previous = None
