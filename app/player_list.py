@@ -11,10 +11,27 @@
 from app.player import Player
 from app.player_node import PlayerNode
 
+
 class PlayerList:
     def __init__(self):
-        self.first = None
-        self.last = None
+        self.__first = None
+        self.__last = None
+
+    @property
+    def first(self):
+        return self.__first
+
+    @first.setter
+    def first(self, value=None):
+        self.__first = value
+
+    @property
+    def last(self):
+        return self.__last
+
+    @last.setter
+    def last(self, value=None):
+        self.__last = value
 
     def InsertAtStart(self, id, name):
         tempNode = PlayerNode(Player(id, name))
@@ -38,13 +55,21 @@ class PlayerList:
 
     def DeleteAtStart(self):
         if not self.isEmpty():
-            self.first = self.first.next
-            self.first.previous = None
+            if self.first.next is not None:
+                self.first = self.first.next
+                self.first.previous = None
+            else:
+                self.first = None
+                self.last = None
 
     def DeleteAtEnd(self):
         if not self.isEmpty():
-            self.last = self.last.previous
-            self.last.next = None
+            if self.last.previous is not None:
+                self.last = self.last.previous
+                self.last.next = None
+            else:
+                self.first = None
+                self.last = None
 
     def isEmpty(self):
         if self.first is None:
