@@ -71,7 +71,62 @@ class PlayerList:
                 self.first = None
                 self.last = None
 
+    def DeleteWithKey(self, key):
+        if not self.isEmpty():
+            currentNode = self.first
+            while True:
+                if currentNode.key == key:
+                    if currentNode == self.first:
+                        self.DeleteAtStart()
+                        break
+
+                    elif currentNode == self.last:
+                        self.DeleteAtEnd()
+                        break
+                    else:
+                        currentNode.previous.next = currentNode.next
+                        currentNode.next.previous = currentNode.previous
+                        break
+
+                elif currentNode.next is not None:
+                    currentNode = currentNode.next
+                else:
+                    print(f"No players with '{key}' found.")
+                    break
+
     def isEmpty(self):
         if self.first is None:
             return True
         return False
+
+    def DisplayList(self, forward=True):
+        counter = 0
+        s = ""
+        if not self.isEmpty():
+            if forward:
+                currentNode = self.first
+            else:
+                currentNode = self.last
+
+            while True:
+                counter += 1
+                s += f"{currentNode.player}\n"
+                if (forward and currentNode.next is None) or (not forward and currentNode.previous is None):
+                    break
+                elif forward:
+                    currentNode = currentNode.next
+                else:
+                    currentNode = currentNode.previous
+            return f"{counter} Players:\n" + s
+        else:
+            return "No players listed."
+
+
+test = PlayerList()
+test.InsertAtEnd("001", "Test1")
+test.InsertAtEnd("002", "Test2")
+test.InsertAtEnd("003", "Test3")
+
+test.DeleteWithKey("002")
+print(test.DisplayList(True))
+print(test.DisplayList(False))
