@@ -8,41 +8,42 @@
 #   This is a description for the file, and I am lazy.
 #
 
+from app.player import Player
+
 
 class PlayerNode:
     def __init__(self, player):
-        self.player = player
-        self.key = self.player.uid
-        self.next = None
-        self.previous = None
+        self.__player = player
+        self.__next = None
+        self.__previous = None
 
     @property
     def player(self):
-        return self.player
+        return self.__player
 
     @player.setter
     def player(self, value):
-        self.player = value
+        self.__player = value
 
     @property
     def key(self):
-        return self.player.uid
+        return self.__player.uid
 
     @property
     def next(self):
-        return self.next
+        return self.__next
 
     @next.setter
     def next(self, value):
-        self.next = value
+        self.__next = value
 
     @property
     def previous(self):
-        return self.previous
+        return self.__previous
 
     @previous.setter
     def previous(self, value):
-        self.previous = value
+        self.__previous = value
 
     def __str__(self):
-        return f"Contains {self.key}: {self.player.name}"
+        return f"Contains {self.key}: {self.__player.name}"
