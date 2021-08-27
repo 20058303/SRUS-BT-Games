@@ -7,6 +7,10 @@
 # Description   :
 #   A class file for the player object.
 #
+import argon2.exceptions
+from argon2 import PasswordHasher
+
+ph = PasswordHasher()
 
 
 class Player:
@@ -18,6 +22,27 @@ class Player:
         """
         self.uid = id
         self.name = name
+        self.__password = None
+
+    def add_password(self, _string):
+        """
+        Adds a hashed password to the player class
+        :param _string: Password wanting to be set.
+        :return: hashed password
+        """
+        self.__password = ph.hash(_string)
+
+    def verify_password(self, _string):
+        """
+        Verifies a string with a stored password
+        :param _string: string to compare
+        :return: True or False
+        """
+        try:
+            if ph.verify(self.__password, _string):
+                return True
+        except argon2.exceptions.VerifyMismatchError:
+            return False
 
     def __str__(self):
         return f"{self.uid}: {self.name}"
