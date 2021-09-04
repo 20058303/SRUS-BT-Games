@@ -22,7 +22,16 @@ class Player:
         """
         self.uid = id
         self.name = name
+        self.__score = 0
         self.__password = None
+
+    @property
+    def score(self):
+        return self.__score
+
+    @score.setter
+    def score(self, value=0):
+        self.__score = value
 
     def add_password(self, _string):
         """
@@ -43,6 +52,16 @@ class Player:
                 return True
         except argon2.exceptions.VerifyMismatchError:
             return False
+
+    def __ge__(self, other):
+        if self.score >= other.score:
+            return True
+        return False
+
+    def __lt__(self, other):
+        if self.score < other.score:
+            return True
+        return False
 
     def __str__(self):
         return f"{self.uid}: {self.name}"
