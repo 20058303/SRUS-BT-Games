@@ -4,6 +4,7 @@ from argon2 import PasswordHasher
 
 ph = PasswordHasher()
 testClass = Player("001", "Test Name")
+testClass2 = Player("002", "Another Name")
 testHash = ph.hash("TestPassword")
 
 
@@ -23,6 +24,11 @@ class PlayerTestCase(unittest.TestCase):
     def test_verifyPassword(self):
         self.assertTrue(testClass.verify_password("TestPassword"))
         self.assertFalse(testClass.verify_password("IncorrectPassword"))
+
+    def test_comparison(self):
+        testClass.score = 4
+        testClass2.score = 2
+        self.assertTrue(testClass > testClass2)
 
 
 if __name__ == '__main__':
