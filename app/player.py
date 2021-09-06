@@ -31,7 +31,10 @@ class Player:
 
     @score.setter
     def score(self, value=0):
-        self.__score = value
+        if value > -1:
+            self.__score = value
+        else:
+            self.__score = 0
 
     def add_password(self, _string):
         """
@@ -65,3 +68,20 @@ class Player:
 
     def __str__(self):
         return f"{self.uid}: {self.name}"
+
+    @staticmethod
+    def InsertionSorting(_list):
+        try:
+            if len(_list) == 0:
+                return False
+            else:
+                for i in range(1, len(_list)):
+                    _val = _list[i]
+                    _pos = i
+
+                    while _pos > 0 and _list[_pos - 1] < _val:
+                        _list[_pos] = _list[_pos - 1]
+                        _pos = _pos - 1
+                    _list[_pos] = _val
+        except ValueError:
+            return "Item is not a list!"
