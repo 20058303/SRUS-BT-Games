@@ -20,6 +20,12 @@ class MyTestCase(unittest.TestCase):
         testTree.Insert(testP56)
         self.assertEqual(testTree.RootNode.rightNode.player.name, testP56.name)
 
+    def test_search(self):
+        testTree.Insert(testP50)
+        testTree.Insert(testP25)
+        testTree.Insert(testP56)
+        self.assertEqual(testTree.Search("56").player, testP56)
+
 
 
 if __name__ == '__main__':
