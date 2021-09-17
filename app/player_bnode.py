@@ -1,3 +1,6 @@
+from app.player import Player
+
+
 class PlayerBNode:
     def __init__(self, player):
         self.__player = player
@@ -13,13 +16,13 @@ class PlayerBNode:
         return self.__leftNode
 
     @leftNode.setter
-    def LeftNode(self, node):
+    def leftNode(self, node):
         self.__leftNode = node
 
     @property
-    def RightNode(self):
+    def rightNode(self):
         return self.__rightNode
 
-    @RightNode.setter
-    def RightNode(self, node):
+    @rightNode.setter
+    def rightNode(self, node):
         self.__rightNode = node
