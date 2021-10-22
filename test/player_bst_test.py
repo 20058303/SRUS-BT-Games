@@ -8,24 +8,26 @@ testP56 = Player("056", "56")
 
 
 class MyTestCase(unittest.TestCase):
+    """
+    Completely outdated test cases - will correct later.
+    """
     def test_insertion(self):
-        testTree.Insert(testP50)
-        self.assertEqual(testTree.RootNode.player.name, testP50.name)
+        testTree.insert(testP50)
+        self.assertEqual(testTree.root_node.player.name, testP50.name)
 
     def test_leftInsertion(self):
-        testTree.Insert(testP25)
-        self.assertEqual(testTree.RootNode.leftNode.player.name, testP25.name)
+        testTree.insert(testP25)
+        self.assertEqual(testTree.root_node.left_node.player.name, testP25.name)
 
     def test_rightInsertion(self):
-        testTree.Insert(testP56)
-        self.assertEqual(testTree.RootNode.rightNode.player.name, testP56.name)
+        testTree.insert(testP56)
+        self.assertEqual(testTree.root_node.right_node.player.name, testP56.name)
 
     def test_search(self):
-        testTree.Insert(testP50)
-        testTree.Insert(testP25)
-        testTree.Insert(testP56)
-        self.assertEqual(testTree.Search("56").player, testP56)
-
+        testTree.insert(testP50)
+        testTree.insert(testP25)
+        testTree.insert(testP56)
+        self.assertEqual(testTree.search("56").player, testP56)
 
 
 if __name__ == '__main__':

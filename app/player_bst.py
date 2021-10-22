@@ -4,51 +4,61 @@ from app.player import Player
 
 class PlayerBST:
     def __init__(self):
-        self.RootNode = None
+        self.root_node = None
 
-    def Insert(self, player):
-        if self.RootNode is None:
-            self.RootNode = PlayerBNode(player)
+    def insert(self, player):
+        """
+        Inserts Player object within the Binary Tree.
+        :param player: Player Object to be added.
+        :return: None
+        """
+        if self.root_node is None:
+            self.root_node = PlayerBNode(player)
         else:
-            currentNode = self.RootNode
+            current_node = self.root_node
             while True:
-                if player.name < currentNode.player.name:
-                    if currentNode.leftNode is not None:
-                        currentNode = currentNode.leftNode
+                if player.name < current_node.player.name:
+                    if current_node.left_node is not None:
+                        current_node = current_node.left_node
                     else:
-                        currentNode.leftNode = PlayerBNode(player)
+                        current_node.left_node = PlayerBNode(player)
                         break
-                elif player.name > currentNode.player.name:
-                    if currentNode.rightNode is not None:
-                        currentNode = currentNode.rightNode
+                elif player.name > current_node.player.name:
+                    if current_node.right_node is not None:
+                        current_node = current_node.right_node
                     else:
-                        currentNode.rightNode = PlayerBNode(player)
+                        current_node.right_node = PlayerBNode(player)
                         break
-                elif player.name == currentNode.player.name:
-                    currentNode.player = player
+                elif player.name == current_node.player.name:
+                    current_node.player = player
                     break
 
-    def Search(self, string):
-        if self.RootNode is None:
+    def search(self, string):
+        """
+        Searches the Binary Tree for a player containing the name of the provided string.
+        :param string: The Name to Search for
+        :return: player object with relevant name if found, otherwise returns false.
+        """
+        if self.root_node is None:
             return False
 
-        elif self.RootNode.player.name == string:
-            return self.RootNode
+        elif self.root_node.player.name == string:
+            return self.root_node
 
         else:
-            currentNode = self.RootNode
+            current_node = self.root_node
             while True:
-                if currentNode.player.name == string:
-                    return currentNode
+                if current_node.player.name == string:
+                    return current_node
 
-                elif string < currentNode.player.name:
-                    if currentNode.leftNode is not None:
-                        currentNode = currentNode.leftNode
+                elif string < current_node.player.name:
+                    if current_node.left_node is not None:
+                        current_node = current_node.left_node
                     else:
                         return False
 
-                elif string > currentNode.player.name:
-                    if currentNode.rightNode is not None:
-                        currentNode = currentNode.rightNode
+                elif string > current_node.player.name:
+                    if current_node.right_node is not None:
+                        current_node = current_node.right_node
                     else:
                         return False
