@@ -11,23 +11,23 @@ class MyTestCase(unittest.TestCase):
     """
     Completely outdated test cases - will correct later.
     """
-    def test_insertion(self):
-        testTree.insert(testP50)
-        self.assertEqual(testTree.root_node.player.name, testP50.name)
+    def setUp(self):
+        self.testTree = PlayerBST()
+        self.testTree.insert(Player("050", "50"))
+        self.testTree.insert(Player("025", "25"))
+        self.testTree.insert(Player("056", "56"))
 
-    def test_leftInsertion(self):
-        testTree.insert(testP25)
-        self.assertEqual(testTree.root_node.left_node.player.name, testP25.name)
-
-    def test_rightInsertion(self):
-        testTree.insert(testP56)
-        self.assertEqual(testTree.root_node.right_node.player.name, testP56.name)
+    def test_correct_insertion(self):
+        self.assertEqual(self.testTree.root_node.player.name, "50")
+        self.assertEqual(self.testTree.root_node.left_node.player.name, "25")
+        self.assertEqual(self.testTree.root_node.right_node.player.name, "56")
 
     def test_search(self):
-        testTree.insert(testP50)
-        testTree.insert(testP25)
-        testTree.insert(testP56)
-        self.assertEqual(testTree.search("56").player, testP56)
+        self.assertEqual(self.testTree.search('50'), self.testTree.root_node)
+        self.assertEqual(self.testTree.search('25'), self.testTree.root_node.left_node)
+
+    def test_display(self):
+        print(self.testTree)
 
 
 if __name__ == '__main__':

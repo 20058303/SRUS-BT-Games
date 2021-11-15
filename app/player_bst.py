@@ -62,3 +62,76 @@ class PlayerBST:
                         current_node = current_node.right_node
                     else:
                         return False
+
+    def display(self, current_node=None, current_list=None):
+        """
+        Displays the Tree's players as a stringed list.
+        :return: string
+        """
+
+        return_list = []
+
+        if current_list is not None:
+            return_list = current_list
+
+        if self.root_node is None:
+            return "Empty BST"
+
+        else:
+            if current_node is None:
+                current_node = self.root_node
+
+            if current_node.left_node is not None:
+                self.display(current_node.left_node, return_list)
+            return_list.append(current_node)
+
+            if current_node.right_node is not None:
+                self.display(current_node.right_node, return_list)
+
+            return_string = ''
+            for node in return_list:
+                return_string += node.player.name + ", "
+            return_string = return_string[:-2]
+            return return_string
+
+    def sort(self, current_node=None, current_list=None):
+        """
+        :param current_node:
+        :param current_list:
+        :return:
+        """
+        return_list = []
+
+        if current_list is not None:
+            return_list = current_list
+
+        if self.root_node is None:
+            return "Empty BST"
+
+        else:
+            if current_node is None:
+                current_node = self.root_node
+
+            if current_node.left_node is not None:
+                self.sort(current_node.left_node, return_list)
+            return_list.append(current_node.player)
+
+            if current_node.right_node is not None:
+                self.sort(current_node.right_node, return_list)
+
+            return_list.sort()
+            middle_node = return_list[int(len(return_list)/2)]
+
+            # pass
+            pass
+
+
+if __name__ == "__main__":
+    testTree = PlayerBST()
+    testTree.insert(Player("5", "5"))
+    testTree.insert(Player("2", "2"))
+    testTree.insert(Player("6", "6"))
+    testTree.insert(Player("3", "3"))
+    testTree.insert(Player("7", "7"))
+    print(testTree.display())
+    print(testTree.sort())
