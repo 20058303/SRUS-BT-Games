@@ -1,12 +1,10 @@
-# Filename      :   player_list.py
-# Location      :  ./app
-# Project       :   SRUS-BT-Games
-# Author        :   Bradley Torpy <200583083@tafe.wa.edu.au>
-# Created       :   13/08/2021
-# Version       :   0.1
-# Description   :
-#   A class file for the player list object, containing player nodes.
-#
+"""
+File:           player_list.py
+Author:         Bradley Torpy <20058303@Tafe.wa.edu.au>
+
+Description:    A double linked list system used for storing player data within nodes. Will be replaced with a
+                balanced binary tree. Allows for insertion at both the start and end.
+"""
 
 from app.player import Player
 from app.player_node import PlayerNode

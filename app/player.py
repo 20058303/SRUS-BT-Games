@@ -1,12 +1,9 @@
-# Filename      :   player.py
-# Location      :  ./app
-# Project       :   SRUS-BT-Games
-# Author        :   Bradley Torpy <200583083@tafe.wa.edu.au>
-# Created       :   13/08/2021
-# Version       :   0.1
-# Description   :
-#   A class file for the player object.
-#
+"""
+File:           player.py
+Author:         Bradley Torpy <20058303@Tafe.wa.edu.au>
+
+Description:    Player class used for storing player information, such as ID, Names, Scores and hashed passwords.
+"""
 import argon2.exceptions
 from argon2 import PasswordHasher
 
@@ -73,7 +70,7 @@ class Player:
     def InsertionSorting(_list):
         try:
             if len(_list) == 0:
-                return False
+                return None
             else:
                 for i in range(1, len(_list)):
                     _val = _list[i]

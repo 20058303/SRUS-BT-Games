@@ -9,7 +9,7 @@ testP56 = Player("056", "56")
 
 class MyTestCase(unittest.TestCase):
     """
-    Completely outdated test cases - will correct later.
+    Tests the Binary Search Tree insertion and searching functionalities.
     """
     def setUp(self):
         self.testTree = PlayerBST()
@@ -25,9 +25,6 @@ class MyTestCase(unittest.TestCase):
     def test_search(self):
         self.assertEqual(self.testTree.root_node, self.testTree.search('50'))
         self.assertEqual(self.testTree.root_node.left_node, self.testTree.search('25'))
-
-    def test_display(self):
-        print(self.testTree)
 
 
 if __name__ == '__main__':

@@ -1,3 +1,10 @@
+"""
+File:           player_bnode.py
+Author:         Bradley Torpy <20058303@Tafe.wa.edu.au>
+
+Description:    Part of the Binary Search Tree structure, the PlayerBNode class acts as a node-based container
+                for the Player class object.
+"""
 from app.player import Player
 
 
@@ -41,27 +48,6 @@ class PlayerBNode:
         elif self.player.name == string:
             return self
         else:
-            return None
-
-    def b_sort(self, current_list=None):
-        """
-        :param current_list:
-        :return:
-        """
-
-        if not current_list:
-            return None
-
-        middle_value = int(len(current_list) / 2)
-
-        try:
-            if current_list[middle_value-1]:
-                self.left_node = current_list[middle_value-1]
-                self.left_node.b_sort(current_list[:middle_value-1])
-            if current_list[middle_value+1]:
-                self.right_node = current_list[middle_value+1]
-                self.right_node.b_sort(current_list[middle_value+1:])
-        except IndexError:
             return None
 
     @property

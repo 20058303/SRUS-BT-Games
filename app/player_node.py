@@ -1,12 +1,8 @@
 """
-    Filename      :   player_node.py
-    Location      :  ./app
-    Project       :   SRUS-BT-Games
-    Author        :   Bradley Torpy <200583083@tafe.wa.edu.au>
-    Created       :   13/08/2021
-    Version       :   0.1
-    Description   :
-    A class file for the player node, to be used with the player_list.py
+File:           player_node.py
+Author:         Bradley Torpy <20058303@Tafe.wa.edu.au>
+
+Description:    Player Node class to be used with double linked list, containing the player class object within.
 """
 
 from app.player import Player
@@ -49,6 +45,11 @@ class PlayerNode:
     @previous.setter
     def previous(self, value):
         self.__previous = value
+
+    def __eq__(self, other):
+        if self.player.name == other.player.name and \
+                self.player.uid == other.player.uid:
+            return True
 
     def __str__(self):
         return f"Contains {self.key}: {self.__player.name}"

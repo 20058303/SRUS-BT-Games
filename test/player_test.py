@@ -3,45 +3,48 @@ from app.player import Player
 from argon2 import PasswordHasher
 
 ph = PasswordHasher()
-testClass = Player("001", "Test Name")
-testClass2 = Player("002", "Another Name")
-testClass3 = Player("003", "Third Name")
-testClass4 = Player("004", "Fourth Name")
-testHash = ph.hash("TestPassword")
 
 
 class PlayerTestCase(unittest.TestCase):
-    def testUID(self):
-        test_UID = "001"
-        self.assertEqual(testClass.uid, test_UID, f"Should Read {test_UID}")
+    def setUp(self):
+        self.testClass1 = Player("001", "Test Name")
+        self.testClass2 = Player("002", "Another Name")
+        self.testClass3 = Player("003", "Third Name")
+        self.testClass4 = Player("004", "Fourth Name")
+        self.testHash = ph.hash("TestPassword")
 
-    def testName(self):
+    def test_a_UID(self):
+        test_uid = "001"
+        self.assertEqual(self.testClass1.uid, test_uid, f"Should Read {test_uid}")
+
+    def test_b_Name(self):
         test_name = "Test Name"
-        self.assertEqual(testClass.name, test_name, f"Should Read {test_name}")
+        self.assertEqual(self.testClass1.name, test_name, f"Should Read {test_name}")
 
-    def test_addPassword(self):
-        testClass.add_password("TestPassword")
-        self.assertTrue(testClass.verify_password("TestPassword"))
+    def test_c_addPassword(self):
+        self.testClass1.add_password("TestPassword")
+        self.assertTrue(self.testClass1.verify_password("TestPassword"))
 
-    def test_verifyPassword(self):
-        self.assertTrue(testClass.verify_password("TestPassword"))
-        self.assertFalse(testClass.verify_password("IncorrectPassword"))
+    def test_d_verifyPassword(self):
+        self.testClass1.add_password("TestPassword")
+        self.assertTrue(self.testClass1.verify_password("TestPassword"))
+        self.assertFalse(self.testClass1.verify_password("IncorrectPassword"))
 
-    def test_comparison(self):
-        testClass.score = 4
-        testClass2.score = 2
-        self.assertTrue(testClass > testClass2)
+    def test_e_comparison(self):
+        self.testClass1.score = 4
+        self.testClass2.score = 2
+        self.assertTrue(self.testClass1 > self.testClass2)
 
-    def test_insertionSort(self):
-        testClass.score = 4
-        testClass2.score = 2
-        testClass3.score = 3
-        testClass4.score = 1
+    def test_f_insertionSort(self):
+        self.testClass1.score = 4
+        self.testClass2.score = 2
+        self.testClass3.score = 3
+        self.testClass4.score = 1
 
-        testList = [testClass, testClass2, testClass3, testClass4]
-        Player.InsertionSorting(testList)
-        self.assertEqual(testList[0].score, 4)  # Checks if first listed player has the highest score
-        self.assertLessEqual(testList[3], testList[0])   # Checks if last player in list has lower score than the first
+        test_list = [self.testClass1, self.testClass2, self.testClass3, self.testClass4]
+        Player.InsertionSorting(test_list)
+        self.assertEqual(test_list[0].score, 4)  # Checks if first listed player has the highest score
+        self.assertLessEqual(test_list[3], test_list[0])  # Checks if last player in list has lower score than the first
 
 
 if __name__ == '__main__':
