@@ -23,8 +23,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(self.testTree.root_node.right_node.player.name, "56")
 
     def test_search(self):
-        self.assertEqual(self.testTree.search('50'), self.testTree.root_node)
-        self.assertEqual(self.testTree.search('25'), self.testTree.root_node.left_node)
+        self.assertEqual(self.testTree.root_node, self.testTree.search('50'))
+        self.assertEqual(self.testTree.root_node.left_node, self.testTree.search('25'))
 
     def test_display(self):
         print(self.testTree)

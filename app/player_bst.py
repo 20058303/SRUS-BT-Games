@@ -15,23 +15,7 @@ class PlayerBST:
         if self.root_node is None:
             self.root_node = PlayerBNode(player)
         else:
-            current_node = self.root_node
-            while True:
-                if player.name < current_node.player.name:
-                    if current_node.left_node is not None:
-                        current_node = current_node.left_node
-                    else:
-                        current_node.left_node = PlayerBNode(player)
-                        break
-                elif player.name > current_node.player.name:
-                    if current_node.right_node is not None:
-                        current_node = current_node.right_node
-                    else:
-                        current_node.right_node = PlayerBNode(player)
-                        break
-                elif player.name == current_node.player.name:
-                    current_node.player = player
-                    break
+            self.root_node.insert(player)
 
     def search(self, string):
         """
@@ -40,28 +24,11 @@ class PlayerBST:
         :return: player object with relevant name if found, otherwise returns false.
         """
         if self.root_node is None:
-            return False
-
+            return None
         elif self.root_node.player.name == string:
             return self.root_node
-
         else:
-            current_node = self.root_node
-            while True:
-                if current_node.player.name == string:
-                    return current_node
-
-                elif string < current_node.player.name:
-                    if current_node.left_node is not None:
-                        current_node = current_node.left_node
-                    else:
-                        return False
-
-                elif string > current_node.player.name:
-                    if current_node.right_node is not None:
-                        current_node = current_node.right_node
-                    else:
-                        return False
+            self.root_node.search(string)
 
     def display(self, current_node=None, current_list=None):
         """
@@ -133,5 +100,10 @@ if __name__ == "__main__":
     testTree.insert(Player("6", "6"))
     testTree.insert(Player("3", "3"))
     testTree.insert(Player("7", "7"))
+
     print(testTree.display())
-    print(testTree.sort())
+
+    print(testTree.root_node.left_node.player.name)
+
+    print(testTree.search('2'))
+
