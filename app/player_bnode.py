@@ -32,27 +32,45 @@ class PlayerBNode:
         :param string: The Name to Search for
         :return: player object with relevant name if found, otherwise returns false.
         """
-        if self.player.name == string:
-            print(f"{self.player}")
-            return self.player
+        if string < self.player.name:
+            if self.left_node is not None:
+                return self.left_node.search(string)
+        elif string > self.player.name:
+            if self.right_node is not None:
+                return self.right_node.search(string)
+        elif self.player.name == string:
+            return self
         else:
-            if string < self.player.name:
-                if self.left_node is not None:
-                    self.left_node.search(string)
-                else:
-                    return None
-            elif string > self.player.name:
-                if self.right_node is not None:
-                    self.right_node.search(string)
-                else:
-                    return None
+            return None
+
+    def b_sort(self, current_list=None):
+        """
+        :param current_list:
+        :return:
+        """
+
+        if not current_list:
+            return None
+
+        middle_value = int(len(current_list) / 2)
+
+        try:
+            if current_list[middle_value-1]:
+                self.left_node = current_list[middle_value-1]
+                self.left_node.b_sort(current_list[:middle_value-1])
+            if current_list[middle_value+1]:
+                self.right_node = current_list[middle_value+1]
+                self.right_node.b_sort(current_list[middle_value+1:])
+        except IndexError:
+            return None
+
     @property
     def player(self):
         return self.__player
 
     @player.setter
-    def player(self, player):
-        self.__player = player
+    def player(self, p):
+        self.__player = p
 
     @property
     def left_node(self):
@@ -69,3 +87,12 @@ class PlayerBNode:
     @right_node.setter
     def right_node(self, node):
         self.__right_node = node
+
+    def __ge__(self, other):
+        return self.player.name >= other.player.name
+
+    def __lt__(self, other):
+        return self.player.name < other.player.name
+
+    def __str__(self):
+        return f"{self.player.name}"

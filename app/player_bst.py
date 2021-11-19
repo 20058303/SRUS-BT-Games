@@ -28,9 +28,9 @@ class PlayerBST:
         elif self.root_node.player.name == string:
             return self.root_node
         else:
-            self.root_node.search(string)
+            return self.root_node.search(string)
 
-    def display(self, current_node=None, current_list=None):
+    def to_list(self, current_node=None, current_list=None):
         """
         Displays the Tree's players as a stringed list.
         :return: string
@@ -49,48 +49,36 @@ class PlayerBST:
                 current_node = self.root_node
 
             if current_node.left_node is not None:
-                self.display(current_node.left_node, return_list)
+                self.to_list(current_node.left_node, return_list)
             return_list.append(current_node)
 
             if current_node.right_node is not None:
-                self.display(current_node.right_node, return_list)
+                self.to_list(current_node.right_node, return_list)
 
-            return_string = ''
-            for node in return_list:
-                return_string += node.player.name + ", "
-            return_string = return_string[:-2]
-            return return_string
+            return_list.sort()
+            return return_list
 
-    def sort(self, current_node=None, current_list=None):
+    def b_sort(self, current_list=None):
         """
-        :param current_node:
         :param current_list:
         :return:
         """
-        return_list = []
 
-        if current_list is not None:
-            return_list = current_list
+        if not current_list:
+            return None
 
-        if self.root_node is None:
-            return "Empty BST"
+        middle_value = int(len(current_list) / 2)
 
-        else:
-            if current_node is None:
-                current_node = self.root_node
+        current_node = current_list[middle_value]
 
-            if current_node.left_node is not None:
-                self.sort(current_node.left_node, return_list)
-            return_list.append(current_node.player)
+        if current_list[middle_value-1]:
+            current_node.left_node = current_list[middle_value-1]
+            current_node.left_node.b_sort(current_list[:middle_value-1])
+        if current_list[middle_value+1]:
+            current_node.right_node = current_list[middle_value+1]
+            current_node.right_node.b_sort(current_list[middle_value+1:])
 
-            if current_node.right_node is not None:
-                self.sort(current_node.right_node, return_list)
-
-            return_list.sort()
-            middle_node = return_list[int(len(return_list)/2)]
-
-            # pass
-            pass
+        self.root_node = current_node
 
 
 if __name__ == "__main__":
@@ -100,10 +88,13 @@ if __name__ == "__main__":
     testTree.insert(Player("6", "6"))
     testTree.insert(Player("3", "3"))
     testTree.insert(Player("7", "7"))
+    testTree.insert(Player("13", "13"))
+    testTree.insert(Player("11", "11"))
+    testTree.insert(Player("18", "18"))
+    testTree.insert(Player("10", "10"))
 
-    print(testTree.display())
+    for i in testTree.to_list():
+        print(i)
 
-    print(testTree.root_node.left_node.player.name)
-
-    print(testTree.search('2'))
+    testTree.b_sort(testTree.to_list())
 
